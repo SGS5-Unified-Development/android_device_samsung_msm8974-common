@@ -76,20 +76,13 @@ void gsm_properties(const char default_network[],
     property_set("telephony.lteOnGsmDevice", "1");
 }
 
-void property_override(char const prop[], char const value[])
+void property_override(char const prop[], char const value[], bool add)
 {
     prop_info *pi;
 
     pi = (prop_info*) __system_property_find(prop);
     if (pi)
         __system_property_update(pi, value, strlen(value));
-    else
+    else if (add)
         __system_property_add(prop, strlen(prop), value, strlen(value));
-}
-
-void property_override_dual(char const system_prop[],
-        char const vendor_prop[], char const value[])
-{
-    property_override(system_prop, value);
-    property_override(vendor_prop, value);
 }

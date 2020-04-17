@@ -31,6 +31,16 @@
 #ifndef __INIT_MSM8974__H__
 #define __INIT_MSM8974__H__
 
+#include <vector>
+
+const auto ro_props_default_source_order = std::vector<std::string> {
+    "",
+    "odm.",
+    "product.",
+    "system.",
+    "vendor.",
+};
+
 void cdma_properties(char const operator_alpha[],
         char const operator_numeric[],
         char const default_cdma_sub[],
@@ -39,8 +49,6 @@ void cdma_properties(char const operator_alpha[],
 void gsm_properties(char const default_network[],
         char const rild_lib_variant[]);
 void init_target_properties();
-void property_override(char const prop[], char const value[]);
-void property_override_dual(char const system_prop[],
-        char const vendor_prop[], char const value[]);
+void property_override(char const prop[], char const value[], bool add = true);
 
 #endif /* __INIT_MSM8974__H__ */
